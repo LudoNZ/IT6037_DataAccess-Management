@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ut8kac@i0q^&lb*64unxzl#xp=m7uz7ueep-!5r6&%qcn3!xdi'
+SECRET_KEY = 'django-insecure-$!60!q)qxapxr(n)=$@xfl9_3%fqjn-6n5(@+%=#=7vr64cx6^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dbproject',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,11 +74,42 @@ WSGI_APPLICATION = 'dbproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django',
+        'NAME': 'demodatabase',
+        'HOST': 'demodatabase',
+        'USER': 'whitecliffegroup',
+        'PASSWORD': 'demodatabase',
+    }
+}
+mongodb+srv://whitecliffegroup:<password>@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django',
+#         'NAME': 'demodatabase',
+#     }
+# }
+
+'''
+
+DATABASES = {
+    'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'demodatabase',
+            'CLIENT': {
+                'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
+            }  
+        }
 }
 
 
