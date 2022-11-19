@@ -1,0 +1,18 @@
+
+{% load static %}
+
+<!-- ########################## Header/Navbar ########################## -->
+
+<nav class="container pt-4 pb-4">
+  <div class="topnav" id="myTopnav">
+      <a href="{% url 'home' %}">
+        <image src="{% static 'images/header_logo.png' %}" alt="Whitecliffe Digital Resources"></image>
+      </a>
+      <a id="login" href="#"><div class="navbutton">Login  <i class="fas fa-sign-in-alt"></i></div></a>
+      <a id="login" href="#"><div class="navbutton">Sign Up  <i class="fas fa-user-plus"></i></div></a>
+      </a>
+      <a id="menu_icon" href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars" id="mobile_menu"></i>
+      </a>
+    </div>
+</nav>
