@@ -21,3 +21,15 @@ class HomePageView(TemplateView):
     def get(self, request):
 
         return render(request, "articles\home.html")
+
+class SearchResultView(TemplateView):
+
+    def get(self, request):
+
+        return render(request, "articles\search_result.html")
+
+class ArticleView(TemplateView):
+
+    def get(self, request):
+
+        return render(request, "articles/article.html")
