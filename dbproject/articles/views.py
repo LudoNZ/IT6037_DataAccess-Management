@@ -20,7 +20,6 @@ def create_article(request):
 
     return HttpResponse("Hello create article View")
 
-@csrf_exempt
 def read_article(request):
     articles = Articles.objects.all()
     response = []
@@ -31,7 +30,17 @@ def read_article(request):
 
     return JsonResponse(response, safe=False)
 
+@csrf_exempt
 def update_article(request):
+    #ERROR DOESNT UPDATE INSERTS NEW OBJECT
+    name = request.POST['name']
+    about = request.POST['about']
+    print(name, about)
+
+    article = Articles.objects.get(name=name)
+    article.about = about
+    article.save()
+
     return HttpResponse("Hello update article TestView")
 
 def delete_article(request):
