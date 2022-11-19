@@ -107,6 +107,7 @@ DATABASES = {
     'default': {
             'ENGINE': 'djongo',
             'NAME': 'demodatabase',
+            'ENFORCE_SCHEMA': False,
             'CLIENT': {
                 'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
             }  
