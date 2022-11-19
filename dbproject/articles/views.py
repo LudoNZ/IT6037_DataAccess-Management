@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from .models import Articles
@@ -20,9 +20,16 @@ def create_article(request):
 
     return HttpResponse("Hello create article View")
 
-
+@csrf_exempt
 def read_article(request):
-    return HttpResponse("Hello read article View")
+    articles = Articles.objects.all()
+    response = []
+
+    for a in articles:
+        print(a.name, a.about)
+        response.append({'name':a.name, 'about':a.about})
+
+    return JsonResponse(response, safe=False)
 
 def update_article(request):
     return HttpResponse("Hello update article TestView")
