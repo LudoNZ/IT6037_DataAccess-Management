@@ -71,6 +71,10 @@ class SearchResultView(TemplateView):
 
 class ArticleView(TemplateView):
 
-    def get(self, request):
+    def get(self, request, pk):
 
-        return render(request, "articles/article.html")
+        article = Articles.objects.get(id=pk)
+
+        context = {'article':article}
+
+        return render(request, "articles/article.html", context)

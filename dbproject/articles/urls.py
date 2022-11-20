@@ -10,5 +10,5 @@ urlpatterns = [
     path('delete_article/', delete_article),
     path("", HomePageView.as_view(), name="home"),
     path("search_result/", SearchResultView.as_view(), name="search_result"),
-    path("article/", ArticleView.as_view(), name="article"),
+    path("article/<int:pk>/", ArticleView.as_view(), name="article"),
 ]
