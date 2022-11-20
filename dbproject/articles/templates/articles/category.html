@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% load static %}
 
-{% block title %} Article {% endblock title %}
+{% block title %} Category {% endblock title %}
 
 {% block content %}
     <!-- ########################## Contents ########################## -->
@@ -11,16 +11,16 @@
           
           <div class="article_container">
             <div class="article_card" href="#">
-              <h2 class="article_heading">{{ article.name }}</h2>
+              <h2 class="article_heading">{{ category.name }}</h2>
               <p class="article_hr"></p>
-              <p class="article_p"><b>Category:</b>{{ article.category }}</p>
-              <p class="article_p"><b>Type:</b>{{ article.type }}</p>
               
-                {% for key, value in article.fields.items %}
-                  <p class="article_p"><b>{{key}}:</b> {{value}}</p>
-                {% endfor %}
+                {% for article in articles %}
 
-              <p class="article_p"><b>About:</b> {{ article.about }}</p>
+                  {% if article.category == category.name %}
+                    <p class="article_p"><b>Name:</b> {{ article.name }}</p>
+                  {% endif %}
+
+                {% endfor %}
 
             </div>
             <a class="see_all_link" href="./search_result.html">

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
-from .models import Articles
+from .models import Articles, Category
 
 # Create your views here.
 
@@ -60,6 +60,18 @@ def delete_article(request):
     return HttpResponse("deleted")
 
 
+@csrf_exempt
+def create_category(request):
+    name = request.POST['name']
+
+    category = Category(name=name)
+    category.save()
+
+    response = "Category created: " + name
+
+    return HttpResponse(response)
+
+
 class HomePageView(TemplateView):
 
     def get(self, request):
@@ -81,3 +93,14 @@ class ArticleView(TemplateView):
         context = {'article':article}
 
         return render(request, "articles/article.html", context)
+
+class CategoryView(TemplateView):
+
+    def get(self, request, pk):
+
+        category = Category.objects.get(id=pk)
+        articles = Articles.objects.all()
+
+        context = {'category':category, 'articles':articles}
+
+        return render(request, "articles/category.html", context)
