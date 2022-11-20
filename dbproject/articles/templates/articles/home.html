@@ -1,10 +1,54 @@
-{% extends "articles\base.html" %} 
+{% extends "base.html" %} 
 {% load static %}
 
 {% block title %} Home {% endblock title %}
 
 {% block content %}
-<h1>Content Header</h1>
-{% endblock content%}
+<!-- ########################## Contents ########################## -->
+    <!-- Top Search by keyword Section -->
+    <section>
+    <section class="top_image">
+      <div class="container">
+        <h1 class="top_h1">Kia Ora!</h1>
+        <h2 class="top_h2">Whitecliffe Digital Resources</h2>
+        <p class="top_p">Supporting your study with multiple resources and<br> enhancing the quality of learning.</p>
+        <div class="top_center_container">
+          <div class="key_search_container">
+            <form class="key_search" action="">
+                <input type="text" name="search" placeholder="Search by a keyword in the title">
+                <button type="submit"><i class="fa fa-search"></i> </button>
+            </form>
+          </div>
 
+        </div>
+      </div>
+    </section>
 
+     <!-- Search By Category -->
+     <section class="container">
+      <div class="center_container">
+        <h1 class="cat_search_title">Search By Category</h1>
+
+        <div class="cat_search_flex">
+          <a>
+            <image src="{% static 'images/icon_art.png' %}" alt="Art" />
+            <h2 class="cat_search_heading">Art</h2>
+          </a>
+          <a>
+            <image src="{% static 'images/icon_math.png' %}" alt="Mathmatics" />
+            <h2 class="cat_search_heading">Mathmatics</h2>
+          </a>
+          <a>
+            <image src="{% static 'images/icon_tech.png' %}" alt="Technology" />
+            <h2 class="cat_search_heading">Technology</h2>
+          </a>
+        </div>
+        
+      </div>
+      <a class="see_all_link" href="./search_result.html">
+        <p>All Articles List <i class="fas fa-caret-right"></i></p>
+      </a>
+      
+    </section>
+
+{% endblock content %}

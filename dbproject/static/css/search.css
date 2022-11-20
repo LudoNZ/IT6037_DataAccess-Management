@@ -1,0 +1,139 @@
+*{
+  box-sizing: border-box;
+}
+.background_gray {
+  background-color: #eee;
+  margin: 0;
+}
+/* Search Result */
+
+.search_result_container {
+  width: 100%;
+  padding: 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search_result_title_container {
+  width: 100%;
+  margin: 0;
+}
+
+.search_result_title {
+  font-size: 2.8rem;
+  font-weight: 300;
+  padding-bottom: .5rem;
+  color: #666;
+}
+
+.search_result_card {
+  width: 100%;
+  background-color: #FFF;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  transition: 0.3s;
+  margin: 1rem 0;
+  padding: 3rem 4rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cat_search_flex a:hover{
+  background-color: #eeeeee;
+}
+
+.serch_result_heading {
+  margin: 0 0 .4rem 0;
+  color: #777;
+  font-family: Quicksand, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 2.3rem;
+}
+
+.serch_result_hr{
+  padding: .5rem 0;
+  border-bottom: 2px solid #77c9b1;
+}
+
+.serch_result_p {
+  margin: 0 0 .4rem 0;
+  color: #777;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.serch_result_p b{
+  color: #80d1b9;
+  font-family: Quicksand, Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width: 800px) {
+  .result_container {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .search_result_container {
+    padding: .5rem 1rem;
+  }
+
+  .search_result_card {
+    margin: 0 0 1.5 0;
+    padding: 1.5rem 1rem;
+  }
+
+  .search_result_title {
+    font-size: 2.2rem;
+  }
+
+  .serch_result_heading {
+    font-size: 2rem;
+  }
+
+  .serch_result_hr{
+    padding: .3rem 0;
+  }
+
+  .serch_result_p {
+    font-size: 1rem;
+  }
+} 
+
+@media screen and (max-width: 450px) {
+  .result_container {
+    margin-bottom: 0;
+    padding: 1rem;
+  }
+
+  .search_result_container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .search_result_card {
+    margin-bottom: 0;
+    margin: .5rem 0;
+    padding: .8rem;
+  }
+
+  .search_result_title {
+    font-size: 1.5rem;
+    padding: 0;
+  }
+
+  .serch_result_heading {
+    font-size: 1.4rem;
+  }
+
+  .serch_result_hr{
+    padding: 0;
+  }
+
+  .serch_result_p {
+    font-size: .9rem
+  }
+  
+} 

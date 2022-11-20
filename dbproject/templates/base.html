@@ -2,38 +2,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Tours {% endblock title %}</title>
-    <link rel="stylesheet" href="{% static '/css/main.css' %}">
-    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} Whitecliffe Digital resources {% endblock title %}</title>
+
+  <!-- css file -->
+  <link rel="stylesheet" href="{% static '/css/main.css' %}">
+  <link rel="stylesheet" href="{% static '/css/search.css' %}">
+  <link rel="stylesheet" href="{% static '/css/article.css' %}">
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome-->
+  <script src="https://kit.fontawesome.com/99b5199ed8.js" crossorigin="anonymous"></script>
+  
+  <!-- Bootstrap 5 -->
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </head>
 <body>
-    <header>
-        <div class="fullwidth">
-            <div class="gridbox">
-                <div style="float:left;"><div style="float:left;margin-top:15px"><img src="{% static 'images/logo.png' %}" alt="Girl in a jacket" width="32" height="32"></div><div style="float:left;margin-left:15px"><h2>GoNZ</h2></div></div>
-                <div class="buttonbox">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}"><div class="navbutton">Logout</div></a>
-                    {% else %}
-                        <a href="{% url 'login' %}"><div class="navbutton">Login</div></a>
-                        <a href="{% url 'signup' %}"><div class="navbutton">Sign Up</div></a>
-                    {% endif %}
+  <!-- ########################## Header/Navbar ########################## -->
+  <header>
+    {% include "navbar.html" %}
+  </header>
 
-                    <a href="{% url 'home' %}"><div class="navbutton">Home</div></a>
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </header>
-    <section>
-        <img src="{% static 'images/header.jpg' %}" alt="Girl in a jacket" width="900" height="211">
-        {% block content %} {% endblock content %}
-    </section>
-    
-    
+
+  <main>
+    {% block content %}{% endblock content %}
+  </main>
+
+  <!-- ########################## Footer ########################## -->
+  <footer class="footer_background_color">
+    {% include "footer.html" %}
+  </footer>
+
+  <!-- JS Files-->
+  <script src="{% static '/js/main.js' %}"></script>
 </body>
 </html>
