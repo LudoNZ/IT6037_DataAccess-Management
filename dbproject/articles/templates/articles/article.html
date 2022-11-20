@@ -11,16 +11,19 @@
           
           <div class="article_container">
             <div class="article_card" href="#">
-              <h2 class="article_heading">Claude Monet{{ article.name }}</h2>
+              <h2 class="article_heading">{{ article.name }}</h2>
               <p class="article_hr"></p>
               <p class="article_p"><b>Category:</b>{{ article.category }}</p>
               <p class="article_p"><b>Type:</b>{{ article.type }}</p>
-              <p class="article_p"><b>Known For:</b>{{ article.customFields.knownFor }}</p>
-              <p class="article_p"><b>Born:</b> 1840</p>
-              <p class="article_p"><b>Died:</b> 1926</p>
-              <p class="article_p"><b>Nationality:</b> French</p>
-              <p class="article_p"><b>Notable Work:</b> Water Lilies</p>
+              
+              <table>
+                {% for key, value in article.fields.items %}
+                  <p class="article_p"><b>{{key}}:</b> {{value}}</p>
+                {% endfor %}
+              </table>
+
               <p class="article_p"><b>About:</b> {{ article.about }}</p>
+
             </div>
             <a class="see_all_link" href="./search_result.html">
               <p>Go Back <i class="fas fa-caret-right"></i></p>

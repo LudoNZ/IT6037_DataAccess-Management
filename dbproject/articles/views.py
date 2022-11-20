@@ -42,6 +42,9 @@ def update_article(request):
     article.category = category
     article.type = type
 
+    fields = {'demo field':'new value', 'another field':'replaced'}
+    article.fields = fields
+
     print(article)
     
     article.save()
