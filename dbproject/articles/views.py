@@ -101,6 +101,9 @@ class CategoryView(TemplateView):
         category = Category.objects.get(id=pk)
         articles = Articles.objects.all()
 
+        for a in articles:
+            a.about = a.about[:150] + "...."
+
         context = {'category':category, 'articles':articles}
 
         return render(request, "articles/category.html", context)
