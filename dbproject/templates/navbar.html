@@ -8,9 +8,14 @@
       <a href="{% url 'home' %}">
         <image src="{% static 'images/header_logo.png' %}" alt="Whitecliffe Digital Resources"></image>
       </a>
-      <a id="login" href="#"><div class="navbutton">Login  <i class="fas fa-sign-in-alt"></i></div></a>
-      <a id="login" href="#"><div class="navbutton">Sign Up  <i class="fas fa-user-plus"></i></div></a>
-      </a>
+
+      {% if user.is_authenticated %}
+        <a id="login" href="{% url 'logout' %}"><div class="navbutton">Log Out <i class="fas fa-sign-in-alt"></i></div></a>
+      {% else %}
+        <a id="login" href="{% url 'login' %}"><div class="navbutton">Login <i class="fas fa-sign-in-alt"></i></div></a>
+        <a id="login" href="{% url 'signup' %}"><div class="navbutton">Sign Up <i class="fas fa-user-plus"></i></div></a>
+      {% endif %}
+
       <a id="menu_icon" href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars" id="mobile_menu"></i>
       </a>
