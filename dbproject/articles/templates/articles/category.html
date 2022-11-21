@@ -16,12 +16,10 @@
               
                 {% for article in articles %}
 
-                  {% if article.category == category.name %}
                     <a href="{% url 'article' pk=article.id %}">
                       <p class="article_p"><b>Name:</b> {{ article.name }}</p>
                     </a>
                     <p class="article_p"><b> -about:</b> {{ article.about }}</p>
-                  {% endif %}
 
                 {% endfor %}
 
