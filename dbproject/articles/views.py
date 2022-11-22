@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.decorators.csrf import csrf_exempt
 from .models import Articles, Category
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -70,6 +73,24 @@ def create_category(request):
     response = "Category created: " + name
 
     return HttpResponse(response)
+
+
+class ArticleCreate(LoginRequiredMixin, CreateView):
+    model = Articles
+    template_name = "articles\create-article.html"
+    success_url="/home"
+    fields =["name", "about", "category", "type", "fields"]
+
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
+    model = Articles
+    template_name = "articles\edit-article.html"
+    success_url="/home"
+    fields =["name", "about", "category", "type", "fields"]
+
+class ArticleDelete(LoginRequiredMixin, DeleteView):
+    model = Articles
+    template_name = "articles/delete-article.html"
+    success_url=reverse_lazy("home")
 
 
 class HomePageView(TemplateView):
