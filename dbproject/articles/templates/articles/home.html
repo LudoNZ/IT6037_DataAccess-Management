@@ -30,15 +30,15 @@
         <h1 class="cat_search_title">Search By Category</h1>
 
         <div class="cat_search_flex">
-          <a>
+          <a href="{% url 'category' pk=2 %}">
             <image src="{% static 'images/icon_art.png' %}" alt="Art" />
             <h2 class="cat_search_heading">Art</h2>
           </a>
-          <a>
+          <a href="{% url 'category' pk=1 %}">
             <image src="{% static 'images/icon_math.png' %}" alt="Mathmatics" />
             <h2 class="cat_search_heading">Mathmatics</h2>
           </a>
-          <a>
+          <a href="{% url 'category' pk=3 %}">
             <image src="{% static 'images/icon_tech.png' %}" alt="Technology" />
             <h2 class="cat_search_heading">Technology</h2>
           </a>

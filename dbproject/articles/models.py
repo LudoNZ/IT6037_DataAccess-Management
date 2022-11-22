@@ -4,6 +4,7 @@ from django.db import models
 
 class Category(models.Model):
     name=models.CharField(max_length=100)
+    fields = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name

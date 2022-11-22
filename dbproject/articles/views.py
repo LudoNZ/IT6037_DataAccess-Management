@@ -97,9 +97,11 @@ class ArticleView(TemplateView):
 class CategoryView(TemplateView):
 
     def get(self, request, pk):
-
         category = Category.objects.get(id=pk)
-        articles = Articles.objects.all()
+        articles = Articles.objects.filter(category=category.name)
+
+        for a in articles:
+            a.about = a.about[:150] + "...."
 
         context = {'category':category, 'articles':articles}
 
