@@ -3,20 +3,44 @@ from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from .models import Articles, Category
+from .forms import ArticlesForm
 
 # Create your views here.
 
 @csrf_exempt
 def create_article(request):
-    name = request.POST['name']
-    about = request.POST['about']
+    
+    new_form = ArticlesForm()
 
-    article = Articles(name=name, about=about)
-    article.save()
+    if request.method == 'POST':
 
-    print(article)
+        filled_form = ArticlesForm(request.POST)
 
-    return HttpResponse("Hello create article View")
+        if filled_form.is_valid():
+            article = filled_form.save()
+            
+            note = 'Article Created: %s' %(article.name)
+
+            context = {'article_form': new_form,
+                    'note': note,
+                    'article': article,
+                    }
+            return render(request, 'articles/article.html', context)
+
+        else:
+            note = 'Article creation Failed, please try again'
+            new_form = filled_form
+
+        context = {'article_form': new_form,
+                    'note': note,
+                    }
+    else:
+        note = 'Create new Article'
+
+        context = {'article_form': new_form,
+                    'note': note,
+                    }
+    return render(request, 'articles/forms/create_article.html', context)
 
 def read_article(request):
     articles = Articles.objects.all()
@@ -29,35 +53,35 @@ def read_article(request):
     return JsonResponse(response, safe=False)
 
 @csrf_exempt
-def update_article(request):
-    name = request.POST['name']
-    about = request.POST['about']
-    category = request.POST['category']
-    type = request.POST['type']
+def update_article(request, pk):
+    article = Articles.objects.get(pk=pk)
+    form = ArticlesForm(instance=article)
 
-    print(name, about)
+    if request.method == 'POST':
+        filled_form = ArticlesForm(request.POST, instance=article)
 
-    article = Articles.objects.get(name=name)
-    article.about = about
-    article.category = category
-    article.type = type
+        if filled_form.is_valid():
+            filled_form.save()
+            form = filled_form
+            note = 'Article updated: %s' %(filled_form.cleaned_data['name'])
+        else:
+            note = 'ERROR, please try again'
+    else:
+        note = 'updating %s' %(article.name)
 
-    fields = {'demo field':'new value', 'another field':'replaced'}
-    article.fields = fields
-
-    print(article)
+    context = {'article_form': form,
+                        'article': article,
+                        'note': note,
+                        }
+    return render(request, 'articles/forms/update_article.html', context)
     
-    article.save()
-
-    return HttpResponse("Hello update article TestView")
 
 @csrf_exempt
-def delete_article(request):
-    name = request.POST['name']
-    article = Articles.objects.get(name=name)
+def delete_article(request, pk):
+    article = Articles.objects.get(pk=pk)
     article.delete()
 
-    return HttpResponse("deleted")
+    return render(request, 'articles/home.html')
 
 
 @csrf_exempt

@@ -4,10 +4,10 @@ from .views import create_article, read_article, update_article, delete_article,
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('create_article/', create_article),
+    path('create_article/', create_article, name="create_article"),
     path('read_article/', read_article),
-    path('update_article/', update_article),
-    path('delete_article/', delete_article),
+    path("article/<int:pk>/edit", update_article, name="update_article"),
+    path('delete_article/<int:pk>/', delete_article, name="delete_article"),
     path('create_category/', create_category),
     path("", HomePageView.as_view(), name="home"),
     path("search_result/", SearchResultView.as_view(), name="search_result"),
