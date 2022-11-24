@@ -1,16 +1,20 @@
-{% extends "base.html" %} 
-{% load static %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %} New Article {% endblock title %}
 
-{% block content %}
-    <h2> {{ note }} </h2>
+{%block content %}
 
-    <form action="{% url 'create_article' %}" method="post">
-        {% csrf_token %}
-        <table>
-            {{ article_form.as_table }}
-        </table>
-            <input type="submit" value="Save">
-    </form>
+<div class="container">
+    <div class="article_form_center">
+        <div class="article_form_card">
+            <h1 class="login_heading">{{ note }} </h1>
+            <form method="post" action="{% url 'create_article' %}" novalidate>
+                {% csrf_token %}
+                {{ article_form|crispy }}
+                <button class="reg_button" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

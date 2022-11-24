@@ -36,7 +36,7 @@
           </a>
           <a href="{% url 'category' pk=1 %}">
             <image src="{% static 'images/icon_math.png' %}" alt="Mathmatics" />
-            <h2 class="cat_search_heading">Mathmatics</h2>
+            <h2 class="cat_search_heading">Mathematics</h2>
           </a>
           <a href="{% url 'category' pk=3 %}">
             <image src="{% static 'images/icon_tech.png' %}" alt="Technology" />
@@ -46,19 +46,8 @@
         
       </div>
       <a class="see_all_link" href="./search_result.html">
-        <p>All Articles List <i class="fas fa-caret-right"></i></p></a>
-        {% if user.is_authenticated %}
-          {% for group in user.groups.all %}
-            {% if group.name == 'Tutors' or group.name == 'Administrators'%}
-              <a href="{% url 'create_article' %}"><p>create article</p></a>
-            {% endif %}
-          {%endfor%}
-          {% if user.is_superuser %} 
-            <a href="{% url 'create_article' %}"><p>create article</p></a>
-          {% endif %}
-        {% endif %}
-
-      
+        <p>All Articles List <i class="fas fa-caret-right"></i></p>
+      </a>
 
     </section>
 

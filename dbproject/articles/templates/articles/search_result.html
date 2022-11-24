@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% load static %}
 
-{% block title %} Search Result {% endblock title %}
+{% block title %} {{ title }} {% endblock title %}
 
 {% block content %}
     <!-- ########################## Contents ########################## -->
@@ -11,11 +11,20 @@
       <div class="container">
         <div class="search_result_container">
           <div class="search_result_title_container">
-            <h1 class="search_result_title">Search Result: {{ search_value }}</h1>
+            <h1 class="search_result_title">Search Result:
+            {% if title == "Arts" %}
+              {{ category.name }}
+            {% elif title == "Mathematics" %}
+              {{ category.name }}
+            {% elif title == "Technology" %}
+              {{ category.name }}
+              {% else %}
+              {{ search_value }}
+            {% endif %}
+            </h1>
           </div>
-        {% for a in articles %}
-                
-          
+
+        {% for a in articles %}                    
           <a class="search_result_card" href="{% url 'article' pk=a.id %}">
             <h2 class="serch_result_heading">{{ a.name }}</h2>
             
@@ -27,8 +36,7 @@
             {% endfor %}
             <p class="serch_result_p"><b>About:</b> {{ a.about }}</p>
           </a>
-
-          {% endfor %}
+        {% endfor %}
 
         </div>
 

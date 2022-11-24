@@ -56,3 +56,26 @@
   font-family: Quicksand, Arial, Helvetica, sans-serif;
 }
 
+.edit_buttons_box {
+  padding:1.5rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.eddit_button a {
+  text-decoration: none;
+  color: #777;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+
+  font-weight: 400;
+  font-size:1.1rem;
+  padding-left:2rem;
+}
+
+.eddit_button a:hover{
+ color: #77c9b1;
+}
+
+
+

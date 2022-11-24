@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -75,8 +76,8 @@ def update_article(request, pk):
 def delete_article(request, pk):
     article = Articles.objects.get(pk=pk)
     article.delete()
-
     return render(request, 'articles/home.html')
+
 
 
 @csrf_exempt
@@ -137,4 +138,4 @@ class CategoryView(TemplateView):
                     'title': category.name,
                     }
 
-        return render(request, "articles/category.html", context)
+        return render(request, "articles/search_result.html", context)
