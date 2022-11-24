@@ -102,6 +102,7 @@ def search_result(request):
 
     context = {'search_value': search_value,
                 'articles':search_results,
+                'title': 'Search result',
                 }
 
     return render(request, "articles\search_result.html", context)
@@ -131,6 +132,9 @@ class CategoryView(TemplateView):
         for a in articles:
             a.about = a.about[:150] + "...."
 
-        context = {'category':category, 'articles':articles}
+        context = {'category':category,
+                    'articles':articles,
+                    'title': category.name,
+                    }
 
         return render(request, "articles/category.html", context)
