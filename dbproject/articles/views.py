@@ -106,24 +106,6 @@ def search_result(request):
 
     return render(request, "articles\search_result.html", context)
 
-class ArticleCreate(LoginRequiredMixin, CreateView):
-    model = Articles
-    template_name = "articles\create-article.html"
-    success_url="/home"
-    fields =["name", "about", "category", "type", "fields"]
-
-class ArticleUpdate(LoginRequiredMixin, UpdateView):
-    model = Articles
-    template_name = "articles\edit-article.html"
-    success_url="/home"
-    fields =["name", "about", "category", "type", "fields"]
-
-class ArticleDelete(LoginRequiredMixin, DeleteView):
-    model = Articles
-    template_name = "articles/delete-article.html"
-    success_url=reverse_lazy("home")
-
-
 class HomePageView(TemplateView):
 
     def get(self, request):
