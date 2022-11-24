@@ -12,8 +12,20 @@
           <div class="article_container">
             <div class="article_card" href="#">
               <h2>{{ note}}</h2>
-              <a href="{% url 'update_article' pk=article.id %}"><p>edit article</p></a>
-              <a href="{% url 'delete_article' pk=article.id %}"><p>delete</p></a>
+              {% if user.is_authenticated %}
+                {% for group in user.groups.all %}
+                  {% if group.name == 'Tutors' or group.name == 'Administrators'%}
+                    <a href="{% url 'update_article' pk=article.id %}"><p>edit article</p></a>
+                    {% if group.name == 'Administrators' %}
+                      <a href="{% url 'delete_article' pk=article.id %}"><p>delete</p></a>
+                    {% endif %}
+                  {% endif %}
+                {%endfor%}
+                {% if user.is_superuser %} 
+                  <a href="{% url 'update_article' pk=article.id %}"><p>edit article</p></a>
+                  <a href="{% url 'delete_article' pk=article.id %}"><p>delete</p></a>
+                {% endif %}
+              {% endif %}
               <h2 class="article_heading">{{ article.name }}</h2>
               <p class="article_hr"></p>
               <p class="article_p"><b>Category:</b>{{ article.category }}</p>
