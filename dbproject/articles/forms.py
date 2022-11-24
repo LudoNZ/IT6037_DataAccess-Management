@@ -21,7 +21,10 @@ class ArticlesForm(forms.ModelForm):
     type = forms.ChoiceField(label="Type", choices=type_choices)
     about = forms.CharField(label="About", max_length=1500, widget=forms.Textarea)
     fields = forms.JSONField(label="Fields (JSON)", max_length=1000, widget=forms.Textarea)
-    
+
     class Meta:
         model = Articles
         fields = '__all__'
+
+class SearchForm(forms.ModelForm):
+    search = forms.CharField()

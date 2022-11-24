@@ -9,46 +9,27 @@
     <!-- Search Result -->
     <section class="background_gray">
       <div class="container">
-        
         <div class="search_result_container">
           <div class="search_result_title_container">
-            <h1 class="search_result_title">Search Result: "Art"</h1>
+            <h1 class="search_result_title">Search Result: {{ search_value }}</h1>
           </div>
-          <a class="search_result_card" href="#">
-            <h2 class="serch_result_heading">Claude Monet</h2>
+        {% for a in articles %}
+                
+          
+          <a class="search_result_card" href="{% url 'article' pk=a.id %}">
+            <h2 class="serch_result_heading">{{ a.name }}</h2>
+            
             <p class="serch_result_hr"></p>
-            <p class="serch_result_p"><b>Category:</b> Arts</p>
-            <p class="serch_result_p"><b>Type:</b> Biography</p>
-            <p class="serch_result_p"><b>Known For:</b> Painter</p>
-            <p class="serch_result_p"><b>About:</b> Oscar-Claude Monet was a French painter, a founder of French Impressionist 
-              painting and the most consistent and prolific practitioner of the movement's 
-              philosophy of expressing one's perceptions before nature, especially 
-              as applied to plein air landscape painting....</p>
+            <p class="serch_result_p"><b>Category:</b> {{ a.category }}</p>
+            <p class="serch_result_p"><b>Type:</b> {{ a.type }}</p>
+            {% for key, value in a.fields.items %}
+              <p class="article_p"><b>{{key}}:</b> {{value}}</p>
+            {% endfor %}
+            <p class="serch_result_p"><b>About:</b> {{ a.about }}</p>
           </a>
 
-          <a class="search_result_card" href="#">
-            <h2 class="serch_result_heading">Claude Monet</h2>
-            <p class="serch_result_hr"></p>
-            <p class="serch_result_p"><b>Category:</b> Arts</p>
-            <p class="serch_result_p"><b>Type:</b> Biography</p>
-            <p class="serch_result_p"><b>Known For:</b> Painter</p>
-            <p class="serch_result_p"><b>About:</b> Oscar-Claude Monet was a French painter, a founder of French Impressionist 
-              painting and the most consistent and prolific practitioner of the movement's 
-              philosophy of expressing one's perceptions before nature, especially 
-              as applied to plein air landscape painting....</p>
-          </a>
+          {% endfor %}
 
-          <a class="search_result_card" href="#">
-            <h2 class="serch_result_heading">Claude Monet</h2>
-            <p class="serch_result_hr"></p>
-            <p class="serch_result_p"><b>Category:</b> Arts</p>
-            <p class="serch_result_p"><b>Type:</b> Biography</p>
-            <p class="serch_result_p"><b>Known For:</b> Painter</p>
-            <p class="serch_result_p"><b>About:</b> Oscar-Claude Monet was a French painter, a founder of French Impressionist 
-              painting and the most consistent and prolific practitioner of the movement's 
-              philosophy of expressing one's perceptions before nature, especially 
-              as applied to plein air landscape painting....</p>
-          </a>
         </div>
 
       </div>

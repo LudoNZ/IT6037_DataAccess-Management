@@ -9,8 +9,7 @@ from .forms import ArticlesForm
 
 @csrf_exempt
 def create_article(request):
-    
-    new_form = ArticlesForm()
+    new_form = ArticlesForm(instance=Articles())
 
     if request.method == 'POST':
 
@@ -95,18 +94,27 @@ def create_category(request):
 
     return HttpResponse(response)
 
+def search_result(request):
+    articles = Articles.objects.all()
+    search_value = request.GET['search'].lower()
+    search_results = []
+
+    for a in articles:
+        if search_value in a.name.lower():
+            a.about = a.about[:100] + "...."
+            search_results.append(a)
+
+    context = {'search_value': search_value,
+                'articles':search_results,
+                }
+
+    return render(request, "articles\search_result.html", context)
 
 class HomePageView(TemplateView):
 
     def get(self, request):
 
         return render(request, "articles\home.html")
-
-class SearchResultView(TemplateView):
-
-    def get(self, request):
-
-        return render(request, "articles\search_result.html")
 
 class ArticleView(TemplateView):
 
