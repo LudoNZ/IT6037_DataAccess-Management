@@ -68,7 +68,7 @@ def update_article(request, pk):
                         'article': article,
                         'note': note,
                         }
-    return render(request, 'articles/forms/update_article.html', context)
+    return render(request, 'articles/forms/create_article.html', context)
     
 
 @csrf_exempt
