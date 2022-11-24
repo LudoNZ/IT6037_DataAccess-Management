@@ -5,62 +5,78 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.decorators.csrf import csrf_exempt
 from .models import Articles, Category
-from django.urls import reverse_lazy
+from .forms import ArticlesForm
 
 # Create your views here.
 
 @csrf_exempt
 def create_article(request):
-    name = request.POST['name']
-    about = request.POST['about']
+    new_form = ArticlesForm(instance=Articles())
 
-    article = Articles(name=name, about=about)
-    article.save()
+    if request.method == 'POST':
 
-    print(article)
+        filled_form = ArticlesForm(request.POST)
 
-    return HttpResponse("Hello create article View")
+        if filled_form.is_valid():
+            article = filled_form.save()
+            
+            note = 'Article Created: %s' %(article.name)
 
-def read_article(request):
-    articles = Articles.objects.all()
-    response = []
+            context = {'note': note,
+                        'article': article,
+                        }
+            return render(request, 'articles/article.html', context)
 
-    for a in articles:
-        print(a.name, a.about)
-        response.append({'name':a.name, 'about':a.about, 'category':a.category, 'type':a.type})
+        else:
+            note = 'Article creation Failed, please try again'
+            new_form = filled_form
 
-    return JsonResponse(response, safe=False)
+        context = {'article_form': new_form,
+                    'note': note,
+                    }
+    else:
+        note = 'Create new Article'
+
+        context = {'article_form': new_form,
+                    'note': note,
+                    }
+    return render(request, 'articles/forms/create_article.html', context)
 
 @csrf_exempt
-def update_article(request):
-    name = request.POST['name']
-    about = request.POST['about']
-    category = request.POST['category']
-    type = request.POST['type']
+def update_article(request, pk):
+    article = Articles.objects.get(pk=pk)
+    form = ArticlesForm(instance=article)
 
-    print(name, about)
+    if request.method == 'POST':
+        filled_form = ArticlesForm(request.POST, instance=article)
 
-    article = Articles.objects.get(name=name)
-    article.about = about
-    article.category = category
-    article.type = type
+        if filled_form.is_valid():
+            filled_form.save()
+            form = filled_form
+            note = 'Article updated: %s' %(filled_form.cleaned_data['name'])
 
-    fields = {'demo field':'new value', 'another field':'replaced'}
-    article.fields = fields
+            context = {'note': note,
+                        'article': article,
+                        }
+            return render(request, 'articles/article.html', context)
+        else:
+            note = 'ERROR, please try again'
+    else:
+        note = 'updating %s' %(article.name)
 
-    print(article)
+    context = {'article_form': form,
+                        'article': article,
+                        'note': note,
+                        }
+    return render(request, 'articles/forms/update_article.html', context)
     
-    article.save()
-
-    return HttpResponse("Hello update article TestView")
 
 @csrf_exempt
-def delete_article(request):
-    name = request.POST['name']
-    article = Articles.objects.get(name=name)
+def delete_article(request, pk):
+    article = Articles.objects.get(pk=pk)
     article.delete()
 
-    return HttpResponse("deleted")
+    return render(request, 'articles/home.html')
 
 
 @csrf_exempt
@@ -74,6 +90,21 @@ def create_category(request):
 
     return HttpResponse(response)
 
+def search_result(request):
+    articles = Articles.objects.all()
+    search_value = request.GET['search'].lower()
+    search_results = []
+
+    for a in articles:
+        if search_value in a.name.lower():
+            a.about = a.about[:100] + "...."
+            search_results.append(a)
+
+    context = {'search_value': search_value,
+                'articles':search_results,
+                }
+
+    return render(request, "articles\search_result.html", context)
 
 class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Articles
@@ -98,12 +129,6 @@ class HomePageView(TemplateView):
     def get(self, request):
 
         return render(request, "articles\home.html")
-
-class SearchResultView(TemplateView):
-
-    def get(self, request):
-
-        return render(request, "articles\search_result.html")
 
 class ArticleView(TemplateView):
 

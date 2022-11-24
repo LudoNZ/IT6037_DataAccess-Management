@@ -14,7 +14,7 @@
         <p class="top_p">Supporting your study with multiple resources and<br> enhancing the quality of learning.</p>
         <div class="top_center_container">
           <div class="key_search_container">
-            <form class="key_search" action="">
+            <form class="key_search" action="{% url 'search' %}" method="get">
                 <input type="text" name="search" placeholder="Search by a keyword in the title">
                 <button type="submit"><i class="fa fa-search"></i> </button>
             </form>
@@ -47,6 +47,7 @@
       </div>
       <a class="see_all_link" href="./search_result.html">
         <p>All Articles List <i class="fas fa-caret-right"></i></p>
+        <a href="{% url 'create_article' %}"><p>create article</p></a>
       </a>
       
     </section>
