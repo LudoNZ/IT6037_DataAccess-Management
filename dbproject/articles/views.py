@@ -20,10 +20,9 @@ def create_article(request):
             
             note = 'Article Created: %s' %(article.name)
 
-            context = {'article_form': new_form,
-                    'note': note,
-                    'article': article,
-                    }
+            context = {'note': note,
+                        'article': article,
+                        }
             return render(request, 'articles/article.html', context)
 
         else:
@@ -41,16 +40,6 @@ def create_article(request):
                     }
     return render(request, 'articles/forms/create_article.html', context)
 
-def read_article(request):
-    articles = Articles.objects.all()
-    response = []
-
-    for a in articles:
-        print(a.name, a.about)
-        response.append({'name':a.name, 'about':a.about, 'category':a.category, 'type':a.type})
-
-    return JsonResponse(response, safe=False)
-
 @csrf_exempt
 def update_article(request, pk):
     article = Articles.objects.get(pk=pk)
@@ -63,6 +52,11 @@ def update_article(request, pk):
             filled_form.save()
             form = filled_form
             note = 'Article updated: %s' %(filled_form.cleaned_data['name'])
+
+            context = {'note': note,
+                        'article': article,
+                        }
+            return render(request, 'articles/article.html', context)
         else:
             note = 'ERROR, please try again'
     else:

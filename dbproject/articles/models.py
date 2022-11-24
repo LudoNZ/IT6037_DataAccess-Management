@@ -13,7 +13,6 @@ class Category(models.Model):
 
 class ArticleTypes(models.Model):
     name=models.CharField(max_length=100)
-    fields = models.JSONField(default=jsonfield_default_value, blank=True)
 
     def __str__(self):
         return self.name
