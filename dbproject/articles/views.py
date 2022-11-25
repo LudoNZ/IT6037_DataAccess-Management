@@ -146,3 +146,20 @@ class DeleteCofirmView(TemplateView):
         article = Articles.objects.get(id=pk)
         context = {'article':article}
         return render(request, "articles/forms/delete_article.html", context)
+
+
+class AllArticlesView(TemplateView):
+
+    def get(self, request):
+
+        articles = Articles.objects.all()
+
+        for a in articles:
+            a.about = a.about[:150] + "...."
+
+        context = {'search_value': 'All Articles',
+                'articles': articles,
+                'title': 'Search result',
+                }
+
+        return render(request, "articles/search_result.html", context)

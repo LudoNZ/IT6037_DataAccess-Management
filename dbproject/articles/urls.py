@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import create_article, update_article, delete_article, HomePageView, ArticleView, CategoryView, create_category, search_result, DeleteCofirmView
+from .views import create_article, update_article, delete_article, HomePageView, ArticleView, CategoryView, create_category, search_result, DeleteCofirmView, AllArticlesView
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     path("article/", search_result, name="search"),
     path("category/<int:pk>/", CategoryView.as_view(), name="category"),
     path("article/<int:pk>/delete", DeleteCofirmView.as_view(), name="delete_confirm"),
+    path("all_articles/", AllArticlesView.as_view(), name="all_articles"),
 ]
