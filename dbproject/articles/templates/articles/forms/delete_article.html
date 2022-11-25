@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %} Delete Article {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="article_form_center">
+        <div class="article_delete_card">
+            <h1 class="delete_form_title">Are you sure?</h1>
+                <p class="delete_form_p">Do you really want to delete "{{ article.name }}"?<br>
+                This process cannot be undone.</p>
+                
+                <div class="delete_button_flex">
+                    <input type="cancel" value="Cancel" onClick="javascript:history.go(-1);" class="form_cancel_button">
+                    <a href="{% url 'delete_article' pk=article.id %}" class="form_delete_button">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

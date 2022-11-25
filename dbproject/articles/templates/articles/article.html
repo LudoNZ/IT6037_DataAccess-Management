@@ -34,7 +34,7 @@
                     </div>
                     {% if group.name == 'Administrators' %}
                     <div class="eddit_button">
-                      <a href="{% url 'delete_article' pk=article.id %}">
+                      <a href="{% url 'delete_confirm' pk=article.id %}">
                         <i class="fas fa-trash-alt" id="green"></i> Delete
                       </a>
                     </div>
