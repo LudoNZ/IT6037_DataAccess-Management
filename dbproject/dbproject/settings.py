@@ -109,10 +109,11 @@ mongodb+srv://whitecliffegroup:<password>@cluster0.q7jrkzv.mongodb.net/?retryWri
 DATABASES = {
     'default': {
             'ENGINE': 'djongo',
-            'NAME': 'usersdb',
-            'ENFORCE_SCHEMA': False,
+            'NAME': 'projectdb',
+            #'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
+                'host': 'mongodb://localhost:27017/'
+                #'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
             }  
         }
 }
