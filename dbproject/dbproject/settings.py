@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms",
+    "crispy_bootstrap5",
+    'articles',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +59,7 @@ ROOT_URLCONF = 'dbproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,9 +109,11 @@ mongodb+srv://whitecliffegroup:<password>@cluster0.q7jrkzv.mongodb.net/?retryWri
 DATABASES = {
     'default': {
             'ENGINE': 'djongo',
-            'NAME': 'demodatabase',
+            'NAME': 'projectdb',
+            #'ENFORCE_SCHEMA': False,
             'CLIENT': {
-                'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
+                'host': 'mongodb://localhost:27017/'
+                #'host': 'mongodb+srv://whitecliffegroup:IT6037@cluster0.q7jrkzv.mongodb.net/?retryWrites=true&w=majority'
             }  
         }
 }
@@ -148,10 +154,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-STATIC_URL = '/static/'
+STATIC_ROOT = "/static/"
+STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "users.CustomUser"
+
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

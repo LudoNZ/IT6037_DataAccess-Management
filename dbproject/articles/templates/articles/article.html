@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}Article{% endblock title %}
+
+{% block content %}
+    <!-- ########################## Contents ########################## -->
+    <!-- Search Result -->
+     <section class="background_gray">
+        <div class="container">
+          
+          <div class="article_container">
+            <div class="article_card">
+              <!-- <h2>{{ note }}</h2> -->
+              <h2 class="article_heading">{{ article.name }}</h2>
+              <p class="article_hr"></p>
+              <p class="article_p"><b>Category:</b>{{ article.category }}</p>
+              <p class="article_p"><b>Type:</b>{{ article.type }}</p>
+              
+              {% for key, value in article.fields.items %}
+                <p class="article_p"><b>{{key}}:</b> {{value}}</p>
+              {% endfor %}
+
+              <p class="article_p"><b>About:</b> {{ article.about }}</p>
+
+              {% if user.is_authenticated %}
+                <div class="edit_buttons_box">
+                {% for group in user.groups.all %}
+                  {% if group.name == 'Tutors' or group.name == 'Administrators' %}
+                    <div class="eddit_button">
+                      <a href="{% url 'update_article' pk=article.id %}">
+                        <i class="fas fa-edit" id="green"></i> Edit Article
+                      </a>
+                    </div>
+                    {% if group.name == 'Administrators' %}
+                    <div class="eddit_button">
+                      <a href="{% url 'delete_confirm' pk=article.id %}">
+                        <i class="fas fa-trash-alt" id="green"></i> Delete
+                      </a>
+                    </div>
+                    {% endif %}
+                  {% endif %}
+                {%endfor%}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- <a class="see_all_link" href="./search_result.html">
+              <p>Go Back <i class="fas fa-caret-right"></i></p>
+            </a> -->
+
+          </div>
+      </div>
+    </section>
+{% endblock content %}

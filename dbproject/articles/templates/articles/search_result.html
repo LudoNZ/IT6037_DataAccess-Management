@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+    <!-- ########################## Contents ########################## -->
+    
+    <!-- Search Result -->
+    <section class="background_gray">
+      <div class="container">
+        <div class="search_result_container">
+          <div class="search_result_title_container">
+            <h1 class="search_result_title">Search Result:
+            {% if title == "Arts" %}
+              {{ category.name }}
+            {% elif title == "Mathematics" %}
+              {{ category.name }}
+            {% elif title == "Technology" %}
+              {{ category.name }}
+              {% else %}
+              {{ search_value }}
+            {% endif %}
+            </h1>
+          </div>
+
+        {% for a in articles %}                    
+          <a class="search_result_card" href="{% url 'article' pk=a.id %}">
+            <h2 class="serch_result_heading">{{ a.name }}</h2>
+            
+            <p class="serch_result_hr"></p>
+            <p class="serch_result_p"><b>Category:</b> {{ a.category }}</p>
+            <p class="serch_result_p"><b>Type:</b> {{ a.type }}</p>
+            {% for key, value in a.fields.items %}
+              <p class="article_p"><b>{{key}}:</b> {{value}}</p>
+            {% endfor %}
+            <p class="serch_result_p"><b>About:</b> {{ a.about }}</p>
+          </a>
+        {% endfor %}
+
+        </div>
+
+      </div>
+    </section>
+{% endblock content %}

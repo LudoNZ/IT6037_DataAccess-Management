@@ -1,0 +1,31 @@
+
+{% load static %}
+
+<!-- ########################## Header/Navbar ########################## -->
+
+<nav class="container pt-4 pb-4">
+  <div class="topnav" id="myTopnav">
+      <a href="{% url 'home' %}">
+        <image src="{% static 'images/header_logo.png' %}" alt="Whitecliffe Digital Resources"></image>
+      </a>
+
+      {% if user.is_authenticated %}
+      <a id="login" href="{% url 'logout' %}"><div class="navbutton"><i class="fas fa-sign-in-alt" id="green"></i> Log Out</div></a>
+      
+      {% for group in user.groups.all %}
+        {% if group.name == 'Tutors' or group.name == 'Administrators' %}
+          <a id="login" href="{% url 'create_article' %}"><i class="fas fa-plus-circle" id="green"></i> Create New Article  </a>
+        {% endif %}
+      {%endfor%}
+
+
+      {% else %}
+        <a id="login" href="{% url 'login' %}"><div class="navbutton"><i class="fas fa-sign-in-alt" id="green"></i> Login </div></a>
+        <a id="login" href="{% url 'signup' %}"><div class="navbutton"><i class="fas fa-user-plus" id="green"></i> Sign Up </div></a>
+      {% endif %}
+
+      <a id="menu_icon" href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars" id="mobile_menu"></i>
+      </a>
+    </div>
+</nav>
